@@ -4,9 +4,11 @@ const path = require("path")
 const { createTermPages } = require(`./createTermPages`)
 const { getTermNodes } = require(`./getTermNodes`)
 
-const { options } = require(`./options`)
-
-const createTaxonomyPages = async ({ taxonomies, gatsbyUtilities }) => {
+const createTaxonomyPages = async ({
+  taxonomies,
+  gatsbyUtilities,
+  options,
+}) => {
   return Promise.all(
     taxonomies.map(async taxonomy => {
       const { archivePath, graphqlSingleName } = taxonomy

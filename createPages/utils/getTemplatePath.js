@@ -1,9 +1,7 @@
 const fs = require("fs")
 const { toCamel } = require(`./toCamel`)
 
-const { options } = require(`../options`)
-
-const getTemplatePath = async ({ node, reporter }) => {
+const getTemplatePath = async ({ node, reporter, options }) => {
   const {
     uri,
     archivePath,

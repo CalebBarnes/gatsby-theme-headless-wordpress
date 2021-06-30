@@ -4,11 +4,10 @@ const { getContentSeo } = require(`./getContentSeo`)
 const { createArchivePages } = require(`./createArchivePages`)
 const { getTemplatePath } = require(`./utils/getTemplatePath`)
 
-const { options } = require(`./options`)
-
 const createContentPages = async ({
   contentNodes,
   gatsbyUtilities: { actions, reporter, graphql },
+  options,
 }) =>
   Promise.all(
     contentNodes.map(async contentNode => {
@@ -27,6 +26,7 @@ const createContentPages = async ({
       const contentTypeTemplatePath = await getTemplatePath({
         node: contentNode,
         reporter,
+        options,
       })
 
       if (!contentTypeTemplatePath) {
