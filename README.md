@@ -1,1 +1,1 @@
-# gatsby-theme-wordpress
+# gatsby-theme-headless-wordpress
