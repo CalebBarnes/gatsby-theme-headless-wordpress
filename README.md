@@ -11,7 +11,7 @@ Install and add the theme to your gatsby-config.js
 yarn add gatsby-theme-headless-wordpress
 ```
 Minimal gatsby-config setup
-```
+```javascript
 module.exports = {
   plugins: [
     {
@@ -38,7 +38,7 @@ module.exports = {
 
 ```
 ## Plugin Options
-```
+```javascript
 {
   resolve: `gatsby-theme-headless-wordpress`
   options: {
