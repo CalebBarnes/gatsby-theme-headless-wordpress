@@ -16,8 +16,6 @@ async function getTaxonomies({ graphql, reporter }) {
                   id
                   uri
                   nodeType
-                  isArchive
-                  archiveContentType
                   template {
                     templateName
                   }
