@@ -7,10 +7,10 @@ const getTemplatePath = async ({ node, reporter, options }) => {
     archivePath,
     nodeType,
     template,
-    isArchive = false,
-    archiveContentType = null,
     contentType = { node: { graphqlSingleName: null } },
+    isPostsPage = false,
   } = node
+
   const { templateName } = template || {}
 
   const {
@@ -18,7 +18,7 @@ const getTemplatePath = async ({ node, reporter, options }) => {
   } = contentType
 
   const templateDirectory = `${options.templatesPath}/${toCamel(
-    isArchive ? `archive` : graphqlSingleName
+    isPostsPage ? `archive` : graphqlSingleName
   )}`
 
   const existingTemplates = []
@@ -28,7 +28,7 @@ const getTemplatePath = async ({ node, reporter, options }) => {
   })
 
   const contentTypeTemplatePath = `${templateDirectory}/${
-    isArchive ? toCamel(archiveContentType) : toCamel(templateName)
+    isPostsPage ? toCamel("post") : toCamel(templateName)
   }`
 
   const resolvedFilePath = existingTemplates.find(
@@ -40,7 +40,7 @@ const getTemplatePath = async ({ node, reporter, options }) => {
   if (!templateExists) {
     reporter.warn(
       `Template "${
-        templateName || archiveContentType
+        templateName || "post"
       }" not found at "${contentTypeTemplatePath}" for node type "${nodeType}" on uri "${
         uri || archivePath
       }"`

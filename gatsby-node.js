@@ -1,3 +1,3 @@
-const { createPages } = require(`./createPages`);
+const { createPages } = require(`./createPages`)
 
-exports.createPages = createPages;
+exports.createPages = createPages

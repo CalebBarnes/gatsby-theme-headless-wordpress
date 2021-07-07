@@ -11,13 +11,7 @@ const createContentPages = async ({
 }) =>
   Promise.all(
     contentNodes.map(async contentNode => {
-      const {
-        id,
-        uri,
-        nodeType,
-        isArchive = false,
-        archiveContentType = null,
-      } = contentNode
+      const { id, uri, nodeType, isPostsPage = false } = contentNode
 
       if (options.excludedNodeTypes.includes(nodeType)) {
         return // early exit for excluded nodeType
@@ -35,9 +29,9 @@ const createContentPages = async ({
 
       const seo = await getContentSeo({ id, nodeType, graphql })
 
-      if (isArchive) {
+      if (isPostsPage) {
         await createArchivePages({
-          archiveContentType,
+          archiveContentType: "post",
           id,
           component: path.resolve(contentTypeTemplatePath),
           uri,

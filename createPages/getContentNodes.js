@@ -7,8 +7,6 @@ async function getContentNodes({ graphql, reporter }) {
           id
           uri
           nodeType
-          isArchive # added resolver for this to ContentNode - true/false
-          archiveContentType # added resolver for this to ContentNode - null or the post type "post", "product", "movie", etc
           template {
             templateName
           }
@@ -16,6 +14,9 @@ async function getContentNodes({ graphql, reporter }) {
             node {
               graphqlSingleName
             }
+          }
+          ... on WpPage {
+            isPostsPage
           }
         }
       }
