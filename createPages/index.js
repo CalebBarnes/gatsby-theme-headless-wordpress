@@ -3,13 +3,14 @@ const { getTaxonomies } = require(`./getTaxonomies`)
 const { createContentPages } = require(`./createContentPages`)
 const { createTaxonomyPages } = require(`./createTaxonomyPages`)
 
-exports.createPages = async (
-  gatsbyUtilities,
-  options = {
-    templatesPath: `./src/templates`,
-    excludedNodeTypes: [`MediaItem`], // excludes creating pages for individual media items
-  }
-) => {
+const defaultOptions = {
+  templatesPath: `./src/templates`,
+  excludedNodeTypes: [`MediaItem`], // excludes creating pages for individual media items
+}
+
+exports.createPages = async (gatsbyUtilities, pluginOptions) => {
+  const options = { ...defaultOptions, ...pluginOptions }
+
   const contentNodes = await getContentNodes(gatsbyUtilities, options)
 
   if (contentNodes.length >= 1) {
