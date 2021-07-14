@@ -23,13 +23,24 @@ const getTemplatePath = async ({ node, reporter, options }) => {
 
   const existingTemplates = []
 
-  fs.readdirSync(templateDirectory).forEach(file => {
-    existingTemplates.push(`${templateDirectory}/${file}`)
-  })
-
   const contentTypeTemplatePath = `${templateDirectory}/${
     isPostsPage ? toCamel("post") : toCamel(templateName)
   }`
+
+  try {
+    fs.readdirSync(templateDirectory).forEach(file => {
+      existingTemplates.push(`${templateDirectory}/${file}`)
+    })
+  } catch (err) {
+    reporter.warn(
+      `Template "${
+        templateName || "post"
+      }" not found at "${contentTypeTemplatePath}" for node type "${nodeType}" on uri "${
+        uri || archivePath
+      }"`
+    )
+    return null
+  }
 
   const resolvedFilePath = existingTemplates.find(
     item => item.startsWith(`${contentTypeTemplatePath}.`) && item
