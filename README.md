@@ -1,10 +1,7 @@
 # gatsby-theme-headless-wordpress
 
-## What does it do?
+## 💡 What does it do?
 This plugin handles creating pages in Gatsby for all of the content sourced by [gatsby-source-wordpress](https://www.gatsbyjs.com/plugins/gatsby-source-wordpress/).
-
-Roadmap:
-- Support CPT archive pages - In progress
 
 ## 🚀 Quick start
 
@@ -13,21 +10,13 @@ Use my starter project [gatsby-starter-headless-wordpress](https://github.com/Ca
 Install and add the theme to your gatsby-config.js
 
 ```
-yarn add gatsby-theme-headless-wordpress
+yarn add gatsby-theme-headless-wordpress gatsby-source-wordpress
 ```
 Minimal gatsby-config setup
 ```javascript
 module.exports = {
   plugins: [
     {
-      /**
-       * First up is the WordPress source plugin that connects Gatsby
-       * to your WordPress site.
-       *
-       * visit the plugin docs to learn more
-       * https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-wordpress/README.md
-       *
-       */
       resolve: `gatsby-source-wordpress`,
       options: {
         // the only required plugin option for WordPress is the GraphQL url.
@@ -54,11 +43,9 @@ module.exports = {
 ```
 
 ## Compatibility
-Currently supports templates, pages, posts, archive pages, taxonomies (tags, categories, custom taxonomies), and custom post types.
+Currently supports WP templates, pages, posts, archive pages, taxonomies (tags, categories, custom taxonomies), and custom post types.
 
-If the [WPGraphQL Yoast SEO Addon](https://wordpress.org/plugins/add-wpgraphql-seo/) is installed in WordPress, this plugin will query the seo data for each node and pass it to the page component's context. `{ pageContext: { seo } }`
-
-
+If the [WPGraphQL Yoast SEO Addon](https://wordpress.org/plugins/add-wpgraphql-seo/) is installed in WordPress, this plugin will query the seo data for each node and pass it to the page context. `{ pageContext: { seo } }`
 
 
 ## 📂Templates
@@ -80,11 +67,17 @@ The template files will follow this folder structure with camel cased names. Sup
                 ├── category.tsx
                 ├── tag.tsx
 
-#### Pages, Posts, and Custom post types:
+##### Pages, Posts, and Custom post types:
 `${pluginOptions.templatesPath}/${postType graphqlSingleName}/${templateName}`
 
-#### Taxonomies:
+##### Taxonomies:
 `${pluginOptions.templatesPath}/taxonomy/${taxonomy.name}`
 
-#### Archive pages:
+##### Archive pages:
 `${pluginOptions.templatesPath}/archive/${postType graphqlSingleName}`
+
+## Roadmap
+- Support CPT archive pages - In progress
+- Add options to pass additional data to page context
+- Add options to have more control over the templates folder structure
+- Allow more generic page components to be used across different post types similar to WP template hierarchy
