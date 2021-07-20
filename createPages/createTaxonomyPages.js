@@ -1,8 +1,8 @@
-const fs = require("fs")
 const path = require("path")
 
 const { createTermPages } = require(`./createTermPages`)
 const { getTermNodes } = require(`./getTermNodes`)
+const { getTemplatePath } = require(`./utils/getTemplatePath`)
 
 const createTaxonomyPages = async ({
   taxonomies,
@@ -17,6 +17,10 @@ const createTaxonomyPages = async ({
         .charAt(0)
         .toUpperCase()}${graphqlSingleName.slice(1)}`
 
+      if (options.excludedNodeTypes.includes(taxNodeType)) {
+        return // early exit for excluded nodeType
+      }
+
       const termNodes = await getTermNodes({
         nodeType: taxNodeType,
         gatsbyUtilities,
@@ -25,15 +29,16 @@ const createTaxonomyPages = async ({
       if (termNodes && termNodes.length >= 1) {
         return Promise.all(
           termNodes.map(async termNode => {
-            const contentTypeTemplatePath = `${options.templatesPath}/taxonomy/${graphqlSingleName}.tsx`
+            const contentTypeTemplatePath = await getTemplatePath({
+              taxonomy,
+              node: termNode,
+              taxNodeType,
+              reporter: gatsbyUtilities.reporter,
+              options,
+            })
 
-            const templateExists = fs.existsSync(contentTypeTemplatePath)
-
-            if (!templateExists) {
-              gatsbyUtilities.reporter.warn(
-                `Component "${termNode.slug}.tsx" not found at "${contentTypeTemplatePath}" for node type "${taxNodeType}" on uri "${archivePath}"`
-              )
-              return null
+            if (!contentTypeTemplatePath) {
+              return // no template found, exit
             }
 
             await createTermPages({

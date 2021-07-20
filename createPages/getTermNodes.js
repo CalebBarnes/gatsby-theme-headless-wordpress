@@ -13,6 +13,7 @@ async function getTermNodes({
             id
             link
             slug
+            uri
           }
         }
       }
