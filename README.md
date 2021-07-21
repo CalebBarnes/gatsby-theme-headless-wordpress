@@ -54,7 +54,7 @@ If the [WPGraphQL Yoast SEO Addon](https://wordpress.org/plugins/add-wpgraphql-s
 
 ## 📂Templates
 
-To use different templates for a single post type a template must be assigned to the page/post in WP.
+To use different templates for a single post type, a template must be assigned to the page/post in WP.
 
 The template files will follow this folder structure with camel cased names. Supports any file extension. (.js, .jsx, .ts, .tsx)
 
