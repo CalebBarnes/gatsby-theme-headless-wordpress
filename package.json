@@ -1,8 +1,12 @@
 {
   "name": "gatsby-theme-headless-wordpress",
-  "version": "0.0.8",
+  "description": "Creates pages for all of the content source by gatsby-source-wordpress.",
+  "author": "Caleb Barnes <caleb.d.barnes@gmail.com>",
+  "version": "0.0.9",
   "main": "index.js",
-  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CalebBarnes/gatsby-theme-headless-wordpress/issues"
+  },
   "scripts": {
     "build": "gatsby build",
     "clean": "gatsby clean",
@@ -10,5 +14,16 @@
   },
   "devDependencies": {
     "dumper.js": "^1.3.1"
-  }
+  },
+  "homepage": "https://github.com/CalebBarnes/gatsby-theme-headless-wordpress#readme",
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "gatsby-plugin-wordpress",
+    "gatsby-source-wordpress",
+    "gatsby-theme-headless-wordpress",
+    "wordpress",
+    "gatsby-theme-wordpress"
+  ],
+  "license": "MIT"
 }
