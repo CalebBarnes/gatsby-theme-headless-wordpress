@@ -92,3 +92,4 @@ The template files will follow this folder structure with camel cased names. Sup
 ## Example sites
 
 - https://jambaree.com/
+- https://www.thedeckingsuperstore.com/
