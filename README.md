@@ -84,8 +84,8 @@ The template files will follow this folder structure with camel cased names. Sup
 
 ## Roadmap
 
-- Support CPT archive pages - In progress
-- Add options to pass additional data to page context
+- ~~Support CPT archive pages~~ - ✔ Completed in 0.1.0
+- Add options to pass additional data to page context - 💥In progress
 - Add options to have more control over the templates folder structure
 - Allow more generic page components to be used across different post types similar to WP template hierarchy
 
