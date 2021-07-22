@@ -18,9 +18,17 @@ const createContentPages = async ({
         return // early exit for excluded nodeType
       }
 
-      const archive = contentTypes.find(
-        contentType => contentType.archivePath === uri
-      )
+      const archive = contentTypes.find(contentType => {
+        if (contentType.archivePath === uri) {
+          if (uri === "/" && !contentType.isFrontPage) {
+            // if no blog page exists, the archivePath defaults to "/"
+            // even if the home page is already set to a different page
+            // todo: test more options for Reading Settings / home page / posts page settings
+            return null
+          }
+          return contentType
+        }
+      })
 
       const contentTypeTemplatePath = await getTemplatePath({
         archive,

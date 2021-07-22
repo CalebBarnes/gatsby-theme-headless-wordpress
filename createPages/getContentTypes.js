@@ -3,10 +3,10 @@ async function getContentTypes({ graphql, reporter }) {
     query WpContentNodes {
       allWpContentType {
         nodes {
-          name
-          hasArchive
           archivePath
           graphqlSingleName
+          isFrontPage
+          isPostsPage
         }
       }
     }
