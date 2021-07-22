@@ -2,6 +2,7 @@ const fs = require("fs")
 const { toCamel } = require(`./toCamel`)
 
 const getTemplatePath = async ({
+  archive,
   node,
   taxonomy,
   taxNodeType,
@@ -10,7 +11,6 @@ const getTemplatePath = async ({
 }) => {
   const {
     uri,
-    archivePath,
     nodeType,
     template = { templateName: null },
     contentType = { node: { graphqlSingleName: null } },
@@ -26,10 +26,10 @@ const getTemplatePath = async ({
   let templateDirectory = ``
   let contentTypeTemplatePath = ``
 
-  if (!!isPostsPage) {
+  if (!!archive) {
     templateDirectory = `${options.templatesPath}/archive`
 
-    contentTypeTemplatePath = `${templateDirectory}/post`
+    contentTypeTemplatePath = `${templateDirectory}/${archive.graphqlSingleName}`
   } else if (!!taxonomy) {
     templateDirectory = `${options.templatesPath}/taxonomy`
 

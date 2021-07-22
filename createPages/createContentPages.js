@@ -5,19 +5,25 @@ const { createArchivePages } = require(`./createArchivePages`)
 const { getTemplatePath } = require(`./utils/getTemplatePath`)
 
 const createContentPages = async ({
+  contentTypes,
   contentNodes,
   gatsbyUtilities: { actions, reporter, graphql },
   options,
 }) =>
   Promise.all(
     contentNodes.map(async contentNode => {
-      const { id, uri, nodeType, isPostsPage = false } = contentNode
+      const { id, uri, nodeType } = contentNode
 
       if (options.excludedNodeTypes.includes(nodeType)) {
         return // early exit for excluded nodeType
       }
 
+      const archive = contentTypes.find(
+        contentType => contentType.archivePath === uri
+      )
+
       const contentTypeTemplatePath = await getTemplatePath({
+        archive,
         node: contentNode,
         reporter,
         options,
@@ -29,9 +35,9 @@ const createContentPages = async ({
 
       const seo = await getContentSeo({ id, nodeType, graphql })
 
-      if (isPostsPage) {
+      if (!!archive) {
         await createArchivePages({
-          archiveContentType: "post",
+          archiveContentType: archive.graphqlSingleName,
           id,
           component: path.resolve(contentTypeTemplatePath),
           uri,
