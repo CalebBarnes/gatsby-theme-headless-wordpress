@@ -105,6 +105,6 @@ Did you use this plugin in a website? Open a pull request and add to this list.
 
 - fixed bug that caused the home page to become the posts page even if no posts archive was set in WP
 
-  0.1.0
+0.1.0
 
 - added support for all post type archives, previous versions only support the /blog/ archive for the default 'post' type
