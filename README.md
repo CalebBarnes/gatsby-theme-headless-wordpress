@@ -48,7 +48,7 @@ module.exports = {
 
 ## Compatibility
 
-Currently supports WP templates, pages, posts, archive pages, taxonomies (tags, categories, custom taxonomies), and custom post types.
+Currently supports WP templates, pages, posts, archive pages, taxonomies (tags, categories, custom taxonomies), custom post types, and custom post type archives.
 
 If the [WPGraphQL Yoast SEO Addon](https://wordpress.org/plugins/add-wpgraphql-seo/) is installed in WordPress, this plugin will query the seo data for each node and pass it to the page context. `{ pageContext: { seo } }`
 
@@ -95,3 +95,9 @@ The template files will follow this folder structure with camel cased names. Sup
 - https://www.thedeckingsuperstore.com/
 
 Did you use this plugin in a website? Open a pull request and add to this list.
+
+## Changelog
+
+0.1.0
+
+- added support for all post type archives, previous versions only support the /blog/ archive for the default 'post' type
