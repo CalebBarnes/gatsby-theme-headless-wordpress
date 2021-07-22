@@ -66,6 +66,9 @@ The template files will follow this folder structure with camel cased names. Sup
                 ├── fullWidth.tsx
             ├── post
                 ├── default.tsx
+            ├── archive
+                ├── post.tsx
+                ├── product.tsx
             ├── taxonomy
                 ├── category.tsx
                 ├── tag.tsx
