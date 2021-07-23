@@ -92,7 +92,7 @@ The template files will follow this folder structure with camel cased names. Sup
 - Add options to have more control over the templates folder structure
 - Allow more generic page components to be used across different post types similar to WP template hierarchy
 
-## Example sites
+## Sites using this plugin
 
 - https://jambaree.com/
 - https://www.thedeckingsuperstore.com/
