@@ -29,7 +29,9 @@ const getTemplatePath = async ({
   if (!!archive) {
     templateDirectory = `${options.templatesPath}/archive`
 
-    contentTypeTemplatePath = `${templateDirectory}/${archive.graphqlSingleName}`
+    contentTypeTemplatePath = `${templateDirectory}/${toCamel(
+      archive.graphqlSingleName
+    )}`
   } else if (!!taxonomy) {
     templateDirectory = `${options.templatesPath}/taxonomy`
 
@@ -45,7 +47,7 @@ const getTemplatePath = async ({
   const existingTemplates = []
 
   const warningMessage = `Template "${
-    templateName || taxonomy.graphqlSingleName || "post"
+    templateName || taxonomy.graphqlSingleName || archive.graphqlSingleName
   }" not found at ${contentTypeTemplatePath} for type "${
     taxNodeType || nodeType
   }" on uri "${uri}"`
