@@ -44,6 +44,8 @@ const createContentPages = async ({
       const seo = await getContentSeo({ id, nodeType, graphql })
 
       if (!!archive) {
+        reporter.verbose(`Creating ${archive.graphqlSingleName} at ${uri}`)
+
         await createArchivePages({
           archiveContentType: archive.graphqlSingleName,
           id,
