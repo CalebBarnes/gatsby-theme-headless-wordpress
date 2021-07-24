@@ -19,9 +19,10 @@
   "keywords": [
     "gatsby",
     "gatsby-plugin",
+    "gatsby-theme",
+    "gatsby-theme-headless-wordpress",
     "gatsby-plugin-wordpress",
     "gatsby-source-wordpress",
-    "gatsby-theme-headless-wordpress",
     "wordpress",
     "gatsby-theme-wordpress"
   ],
