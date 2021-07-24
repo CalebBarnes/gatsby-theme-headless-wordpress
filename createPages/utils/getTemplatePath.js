@@ -63,7 +63,7 @@ const getTemplatePath = async ({
   }
 
   const resolvedFilePath = existingTemplates.find(
-    item => item.startsWith(`${contentTypeTemplatePath}.`) && item
+    filePath => filePath.startsWith(`${contentTypeTemplatePath}.`) && filePath
   )
 
   const templateExists = fs.existsSync(resolvedFilePath) // check if template exists
