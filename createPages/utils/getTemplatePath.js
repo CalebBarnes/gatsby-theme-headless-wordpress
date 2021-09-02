@@ -62,9 +62,17 @@ const getTemplatePath = async ({
     return null
   }
 
-  const resolvedFilePath = existingTemplates.find(
-    filePath => filePath.startsWith(`${contentTypeTemplatePath}.`) && filePath
-  )
+  const resolvedFilePath = existingTemplates.find(filePath => {
+    const extensionIndex = filePath.lastIndexOf(".")
+    const pathWithoutExtension = filePath.slice(0, extensionIndex)
+    const fileExtension = filePath.slice(extensionIndex)
+
+    if (contentTypeTemplatePath === pathWithoutExtension) {
+      if (`${contentTypeTemplatePath}${fileExtension}` === filePath) {
+        return filePath
+      }
+    }
+  })
 
   const templateExists = fs.existsSync(resolvedFilePath) // check if template exists
 
