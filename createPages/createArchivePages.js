@@ -3,7 +3,7 @@ const chunk = require("lodash/chunk")
 const { toCamel } = require("./utils/toCamel")
 
 /**
- * ? This function creates all the individual archive pages in this site
+ * ? This function creates all the individual archive pages
  */
 async function createArchivePages({
   archiveContentType,
@@ -83,6 +83,7 @@ async function createArchivePages({
 
           // We need to tell the template how many posts to display too
           postsPerPage,
+          totalPages, // it can be helpful if the template knows the total number of pages
           nextPagePath: hasNextPage ? getPagePath(pageNumber + 1) : null,
           previousPagePath: hasPrevPage ? getPagePath(pageNumber - 1) : null,
         },
