@@ -62,7 +62,7 @@ The template files will follow this folder structure with camel cased names. Sup
     ├── src
         ├── templates
             ├── page // post type graphqlSingleName
-                ├── default.tsx 
+                ├── default.tsx
                 ├── fullWidth.tsx // name of the template assigned to the page in WP (camelCased)
             ├── post
                 ├── default.tsx
@@ -101,6 +101,10 @@ The template files will follow this folder structure with camel cased names. Sup
 Did you use this plugin in a website? Open a pull request and add to this list.
 
 ## Changelog
+
+0.1.4
+
+- added `totalPages` to pageContext for archive pages and taxonomy pages. This is to help with page templates that need more advanced pagination than just prev/next buttons.
 
 0.1.1
 
