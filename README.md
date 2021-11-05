@@ -61,17 +61,18 @@ The template files will follow this folder structure with camel cased names. Sup
     .
     ├── src
         ├── templates
-            ├── page
-                ├── default.tsx
-                ├── fullWidth.tsx
+            ├── page // post type graphqlSingleName
+                ├── default.tsx 
+                ├── fullWidth.tsx // name of the template assigned to the page in WP (camelCased)
             ├── post
                 ├── default.tsx
             ├── archive
-                ├── post.tsx
+                ├── post.tsx // post type graphqlSingleName
                 ├── product.tsx
             ├── taxonomy
                 ├── category.tsx
                 ├── tag.tsx
+                ├── customTaxonomyName.tsx
 
 ##### Pages, Posts, and Custom post types:
 
