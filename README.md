@@ -102,6 +102,10 @@ Did you use this plugin in a website? Open a pull request and add to this list.
 
 ## Changelog
 
+0.1.5
+
+- added `currentPage` to pageContext for archive pages and taxonomy pages. Used to help with pagination in page templates.
+
 0.1.4
 
 - added `totalPages` to pageContext for archive pages and taxonomy pages. This is to help with page templates that need more advanced pagination than just prev/next buttons.
