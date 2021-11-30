@@ -56,6 +56,7 @@ const createContentPages = async ({
           actions,
           reporter,
           seo,
+          options,
         })
         return
       } else {

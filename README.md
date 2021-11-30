@@ -42,6 +42,14 @@ module.exports = {
   options: {
      templatesPath: `./src/templates`, // default ~ the folder where you will keep your page template files
      excludedNodeTypes: [`MediaItem`], // default ~ excludes creating pages for individual media items
+     type: {
+       __all: { // '__all' will override options for all post types
+         postsPerPage: 999 // overrides the postsPerPage option from WordPress reading settings
+       },
+       post: { // 'post' will override options for a specific post type, matching by graphqlSingleName
+         postsPerPage: 999 // overrides the postsPerPage option from WordPress reading settings
+       }
+     }
   }
 }
 ```
@@ -101,6 +109,10 @@ The template files will follow this folder structure with camel cased names. Sup
 Did you use this plugin in a website? Open a pull request and add to this list.
 
 ## Changelog
+
+0.1.7
+
+- added plugin options to override `postsPerPage` for specific post types or globally.
 
 0.1.6
 

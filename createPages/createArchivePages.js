@@ -15,6 +15,7 @@ async function createArchivePages({
   actions,
   reporter,
   seo,
+  options,
 }) {
   const nodes = contentNodes.filter(
     node => toCamel(node.nodeType) === toCamel(archiveContentType)
@@ -30,7 +31,23 @@ async function createArchivePages({
     }
   `)
 
-  const { postsPerPage } = graphqlResult.data.wp.readingSettings
+  const { readingSettings } = graphqlResult.data.wp
+
+  let postsPerPage = readingSettings.postsPerPage
+
+  if (options.type) {
+    // load postsPerPage overrides from plugin options
+    if (
+      options.type[archiveContentType] &&
+      options.type[archiveContentType].postsPerPage
+    ) {
+      postsPerPage = options.type[archiveContentType].postsPerPage
+    }
+
+    if (options.type[`__all`]) {
+      postsPerPage = options.type[`__all`].postsPerPage
+    }
+  }
 
   const nodesChunkedIntoArchivePages = chunk(nodes, postsPerPage)
 
