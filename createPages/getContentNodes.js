@@ -12,6 +12,7 @@ async function getContentNodes({ graphql, reporter }) {
           }
           contentType {
             node {
+              archivePath
               graphqlSingleName
             }
           }

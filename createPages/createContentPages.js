@@ -12,7 +12,7 @@ const createContentPages = async ({
 }) =>
   Promise.all(
     contentNodes.map(async contentNode => {
-      const { id, uri, nodeType } = contentNode
+      const { id, uri, nodeType, contentType } = contentNode
 
       if (options.excludedNodeTypes.includes(nodeType)) {
         return // early exit for excluded nodeType
@@ -68,6 +68,7 @@ const createContentPages = async ({
           context: {
             id,
             seo,
+            archivePath: contentType.node && contentType.node.archivePath,
           },
         })
       }

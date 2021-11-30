@@ -102,6 +102,10 @@ Did you use this plugin in a website? Open a pull request and add to this list.
 
 ## Changelog
 
+0.1.6
+
+- added `archivePath` to pageContext for single pages. Now single pages can link back to the archive page OR use this uri to query data from the archive page.
+
 0.1.5
 
 - added `currentPage` to pageContext for archive pages and taxonomy pages. Used to help with pagination in page templates.
