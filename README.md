@@ -44,13 +44,27 @@ module.exports = {
      excludedNodeTypes: [`MediaItem`], // default ~ excludes creating pages for individual media items
      type: {
        __all: { // '__all' will override options for all post types
-         postsPerPage: 999 // overrides the postsPerPage option from WordPress reading settings
+         postsPerPage: 999
        },
+       
        post: { // 'post' will override options for a specific post type, matching by graphqlSingleName
-         postsPerPage: 999 // overrides the postsPerPage option from WordPress reading settings
+         postsPerPage: 999
        },
+       page: { // 'page' will override options for a specific post type, matching by graphqlSingleName
+         postsPerPage: 999
+       },
+       anyCustomPostType: { // 'anyCustomPostType' will override options for a specific post type, matching by graphqlSingleName
+         postsPerPage: 999
+       },
+       
        category: { // 'category' will override options for the specific taxonomy term node
-         postsPerPage: 999 // overrides the postsPerPage option from WordPress reading settings
+         postsPerPage: 999
+       },
+       tag: { // 'tag' will override options for that specific taxonomy term node
+         postsPerPage: 999
+       },
+       anyCustomTaxonomy: { // 'customTaxonomy' will override options for that specific taxonomy term node
+         postsPerPage: 999
        },
      }
   }
@@ -118,7 +132,7 @@ Did you use this plugin in a website? Open a pull request and add to this list.
 0.1.8
 
 - fixed issue with taxonomy archive pagination. Now taxonomy pages will paginate correctly.
-- added the ability to override postsPerPage for taxonomy archive pages, similar to how you would override postsPerPage for normal archive pages.
+- added the ability to override `postsPerPage` for taxonomy archive pages, similar to how you would override `postsPerPage` for normal archive pages.
 - Tested with WPGraphQL 1.6.12 and WPGatsby 2.1.1
 
 0.1.7
