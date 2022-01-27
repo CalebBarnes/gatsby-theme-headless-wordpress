@@ -48,7 +48,10 @@ module.exports = {
        },
        post: { // 'post' will override options for a specific post type, matching by graphqlSingleName
          postsPerPage: 999 // overrides the postsPerPage option from WordPress reading settings
-       }
+       },
+       category: { // 'category' will override options for the specific taxonomy term node
+         postsPerPage: 999 // overrides the postsPerPage option from WordPress reading settings
+       },
      }
   }
 }
@@ -111,6 +114,11 @@ The template files will follow this folder structure with camel cased names. Sup
 Did you use this plugin in a website? Open a pull request and add to this list.
 
 ## Changelog
+
+0.1.8
+
+- fixed issue with taxonomy archive pagination. Now taxonomy pages will paginate correctly.
+- added the ability to override postsPerPage for taxonomy archive pages, similar to how you would override postsPerPage for normal archive pages.
 
 0.1.7
 

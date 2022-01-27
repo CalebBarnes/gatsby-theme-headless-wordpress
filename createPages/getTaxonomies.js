@@ -8,26 +8,7 @@ async function getTaxonomies({ graphql, reporter }) {
           id
           archivePath
           graphqlSingleName
-          connectedContentTypes {
-            nodes {
-              graphqlSingleName
-              contentNodes {
-                nodes {
-                  id
-                  uri
-                  nodeType
-                  template {
-                    templateName
-                  }
-                  contentType {
-                    node {
-                      graphqlSingleName
-                    }
-                  }
-                }
-              }
-            }
-          }
+          name
         }
       }
     }

@@ -1,7 +1,12 @@
 const path = require("path")
 
 const { createTermPages } = require(`./createTermPages`)
-const { getTermNodes } = require(`./getTermNodes`)
+
+const { getTermNodesByTaxonomyName } = require(`./getTermNodesByTaxonomyName`)
+const {
+  getTermContentNodesByTermNodeId,
+} = require(`./getTermContentNodesByTermNodeId`)
+
 const { getTemplatePath } = require(`./utils/getTemplatePath`)
 
 const createTaxonomyPages = async ({
@@ -11,7 +16,7 @@ const createTaxonomyPages = async ({
 }) => {
   return Promise.all(
     taxonomies.map(async taxonomy => {
-      const { archivePath, graphqlSingleName } = taxonomy
+      const { graphqlSingleName, name: taxonomyName } = taxonomy
 
       const taxNodeType = `${graphqlSingleName
         .charAt(0)
@@ -21,14 +26,21 @@ const createTaxonomyPages = async ({
         return // early exit for excluded nodeType
       }
 
-      const termNodes = await getTermNodes({
-        nodeType: taxNodeType,
+      // getting list of individual terms (ex: "my-category", "my-other-category")
+      // by the taxonomyName (ex: "category")
+      const termNodes = await getTermNodesByTaxonomyName({
+        taxonomyName, // ex: "category"
         gatsbyUtilities,
       })
 
       if (termNodes && termNodes.length >= 1) {
         return Promise.all(
           termNodes.map(async termNode => {
+            const termContentNodes = await getTermContentNodesByTermNodeId({
+              termNodeId: termNode.id,
+              gatsbyUtilities,
+            })
+
             const contentTypeTemplatePath = await getTemplatePath({
               taxonomy,
               node: termNode,
@@ -42,13 +54,13 @@ const createTaxonomyPages = async ({
             }
 
             await createTermPages({
-              graphqlSingleName,
-              id: termNode.id,
-              uri: termNode.link,
+              taxNodeType,
+              termNode,
+              termContentNodes,
               component: path.resolve(contentTypeTemplatePath),
               gatsbyUtilities,
+              options,
             })
-            return
           })
         )
       }

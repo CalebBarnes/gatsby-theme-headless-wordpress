@@ -4,17 +4,15 @@ const chunk = require("lodash/chunk")
  * ? This function creates all the individual term pages in this site
  */
 async function createTermPages({
-  graphqlSingleName,
-  id,
+  termNode,
+  termContentNodes,
   component,
-  uri,
   gatsbyUtilities,
+  options,
 }) {
   const {
     data: {
-      wp: {
-        readingSettings: { postsPerPage },
-      },
+      wp: { readingSettings },
     },
   } = await gatsbyUtilities.graphql(/* GraphQL */ `
     {
@@ -26,45 +24,23 @@ async function createTermPages({
     }
   `)
 
-  const {
-    data: {
-      allWpTaxonomy: { taxonomyNodes },
-    },
-  } = await gatsbyUtilities.graphql(
-    /* GraphQL */ `
-      query TaxPages($graphqlSingleName: String!) {
-        allWpTaxonomy(
-          filter: { graphqlSingleName: { eq: $graphqlSingleName } }
-        ) {
-          taxonomyNodes: nodes {
-            graphqlSingleName
-            archivePath
-            connectedContentTypes {
-              nodes {
-                id
-                uri
-                contentNodes {
-                  nodes {
-                    uri
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    `,
-    { graphqlSingleName }
-  )
+  let postsPerPage = readingSettings.postsPerPage
 
-  const nodes =
-    taxonomyNodes &&
-    taxonomyNodes[0] &&
-    taxonomyNodes[0].connectedContentTypes &&
-    taxonomyNodes[0].connectedContentTypes.nodes
+  if (options.type) {
+    // load postsPerPage overrides from plugin options
+    if (
+      options.type[termNode.taxonomyName] &&
+      options.type[termNode.taxonomyName].postsPerPage
+    ) {
+      postsPerPage = options.type[termNode.taxonomyName].postsPerPage
+    }
 
-  const nodesChunkedIntoArchivePages = chunk(nodes, postsPerPage)
+    if (options.type[`__all`]) {
+      postsPerPage = options.type[`__all`].postsPerPage
+    }
+  }
 
+  const nodesChunkedIntoArchivePages = chunk(termContentNodes, postsPerPage)
   const totalPages = nodesChunkedIntoArchivePages.length
 
   return Promise.all(
@@ -80,14 +56,14 @@ async function createTermPages({
           // we want the first page to be the uri of the archive page. example: "/blog/"
           // and any additional pages to be numbered. example: "/blog/2"
 
-          return page === 1 ? uri : `${uri}${page}`
+          return page === 1 ? termNode.uri : `${termNode.uri}${page}`
         }
 
         return null
       }
 
       gatsbyUtilities.reporter.verbose(
-        `Creating ${graphqlSingleName} archive page at ${getPagePath(
+        `Creating Term Archive Page at ${termNode.slug} at ${getPagePath(
           pageNumber
         )}`
       )
@@ -106,7 +82,7 @@ async function createTermPages({
         // `context` is available in the template as a prop and
         // as a variable in GraphQL.
         context: {
-          id,
+          id: termNode.id,
           // the index of our loop is the offset of which posts we want to display
           // so for page 1, 0 * 10 = 0 offset, for page 2, 1 * 10 = 10 posts offset,
           // etc
