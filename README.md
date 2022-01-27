@@ -119,10 +119,12 @@ Did you use this plugin in a website? Open a pull request and add to this list.
 
 - fixed issue with taxonomy archive pagination. Now taxonomy pages will paginate correctly.
 - added the ability to override postsPerPage for taxonomy archive pages, similar to how you would override postsPerPage for normal archive pages.
+- Tested with WPGraphQL 1.6.12 and WPGatsby 2.1.1
 
 0.1.7
 
 - added plugin options to override `postsPerPage` for specific post types or globally.
+- Tested with WPGraphQL 1.4.3 and WPGatsby 1.0.10
 
 0.1.6
 
