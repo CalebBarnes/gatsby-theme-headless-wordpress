@@ -129,6 +129,9 @@ Did you use this plugin in a website? Open a pull request and add to this list.
 
 ## Changelog
 
+0.1.9
+- fixed taxonomy query issue that was introduced in 0.1.8
+
 0.1.8
 
 - fixed issue with taxonomy archive pagination. Now taxonomy pages will paginate correctly.
