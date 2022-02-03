@@ -1,12 +1,13 @@
 async function getTermContentNodesByTermNodeId({
   termNodeId,
+  termNodeTypeName,
   gatsbyUtilities: { graphql, reporter },
 }) {
   const graphqlResult = await graphql(
     /* GraphQL */ `
       query TermNodeContentNodes($termNodeId: String!) {
         wpTermNode(id: { eq: $termNodeId }) {
-          ... on WpCategory {
+          ... on ${termNodeTypeName} {
             id
             name
             contentNodes {

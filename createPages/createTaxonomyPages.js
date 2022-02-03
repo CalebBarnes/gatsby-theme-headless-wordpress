@@ -38,6 +38,7 @@ const createTaxonomyPages = async ({
           termNodes.map(async termNode => {
             const termContentNodes = await getTermContentNodesByTermNodeId({
               termNodeId: termNode.id,
+              termNodeTypeName: termNode.__typename,
               gatsbyUtilities,
             })
 

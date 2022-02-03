@@ -2,7 +2,7 @@
   "name": "gatsby-theme-headless-wordpress",
   "description": "Creates pages for all of the content source by gatsby-source-wordpress.",
   "author": "Caleb Barnes <caleb.d.barnes@gmail.com>",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "main": "index.js",
   "bugs": {
     "url": "https://github.com/CalebBarnes/gatsby-theme-headless-wordpress/issues"
