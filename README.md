@@ -124,6 +124,7 @@ The template files will follow this folder structure with camel cased names. Sup
 - https://www.thedeckingsuperstore.com/
 - https://polarbattery.com/
 - https://walkerbay.com/
+- https://onlyfencing.ca/
 
 Did you use this plugin in a website? Open a pull request and add to this list.
 
