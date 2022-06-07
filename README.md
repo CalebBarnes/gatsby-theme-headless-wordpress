@@ -42,6 +42,7 @@ module.exports = {
   options: {
      templatesPath: `./src/templates`, // default ~ the folder where you will keep your page template files
      excludedNodeTypes: [`MediaItem`], // default ~ excludes creating pages for individual media items
+     excludedPageUrls: [`/hello-world/`, `/test-page/`], // this is empty by default ~ excludes creating pages by their uri
      type: {
        __all: { // '__all' will override options for all post types
          postsPerPage: 999
