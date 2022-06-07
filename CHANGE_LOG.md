@@ -1,5 +1,8 @@
 ## Changelog
 
+0.1.10
+- added new option `excludedPageUrls` to allow excluding pages from being created by their uri
+
 0.1.9
 - fixed taxonomy query issue that was introduced in 0.1.8
 

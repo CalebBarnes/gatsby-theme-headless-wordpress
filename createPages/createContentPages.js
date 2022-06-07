@@ -3,6 +3,7 @@ const path = require("path")
 const { getContentSeo } = require(`./getContentSeo`)
 const { createArchivePages } = require(`./createArchivePages`)
 const { getTemplatePath } = require(`./utils/getTemplatePath`)
+const { getPageExclusionStatus } = require(`./utils/getPageExclusionStatus`)
 
 const createContentPages = async ({
   contentTypes,
@@ -14,8 +15,10 @@ const createContentPages = async ({
     contentNodes.map(async contentNode => {
       const { id, uri, nodeType, contentType } = contentNode
 
-      if (options.excludedNodeTypes.includes(nodeType)) {
-        return // early exit for excluded nodeType
+      const isPageExcluded = getPageExclusionStatus({ contentNode, options })
+
+      if (isPageExcluded) {
+        return // early exit for excluded pages
       }
 
       const archive = contentTypes.find(contentType => {

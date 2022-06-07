@@ -9,6 +9,7 @@ const { formatLogMessage } = require(`./utils/formatLogMessage`)
 const defaultOptions = {
   templatesPath: `./src/templates`,
   excludedNodeTypes: [`MediaItem`], // excludes creating pages for individual media items
+  excludedPageUrls: [], // excludes creating pages for specific urls
 }
 
 exports.createPages = async (gatsbyUtilities, pluginOptions) => {
