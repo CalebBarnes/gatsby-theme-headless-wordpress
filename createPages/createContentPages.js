@@ -69,6 +69,7 @@ const createContentPages = async ({
         return actions.createPage({
           path: uri,
           component: path.resolve(contentTypeTemplatePath),
+          ownerNodeId: id,
           context: {
             id,
             seo,
