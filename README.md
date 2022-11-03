@@ -121,6 +121,7 @@ The template files will follow this folder structure with camel cased names. Sup
 
 ## Sites using this plugin
 
+- https://fitnesstown.ca/
 - https://jambaree.com/
 - https://www.thedeckingsuperstore.com/
 - https://polarbattery.com/
