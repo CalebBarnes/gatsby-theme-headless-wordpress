@@ -5,6 +5,8 @@ const { createArchivePages } = require(`./createArchivePages`)
 const { getTemplatePath } = require(`./utils/getTemplatePath`)
 const { getPageExclusionStatus } = require(`./utils/getPageExclusionStatus`)
 
+const { getPageData } = require("./utils/getPageData")
+
 const createContentPages = async ({
   contentTypes,
   contentNodes,
@@ -65,17 +67,32 @@ const createContentPages = async ({
       } else {
         reporter.verbose(`Creating ${nodeType} at ${uri}`)
 
+        // let pageData = {
+        //   path: uri,
+        //   component: path.resolve(contentTypeTemplatePath),
+        //   ownerNodeId: id,
+        //   context: {
+        //     id,
+        //     seo,
+        //     archivePath: contentType.node && contentType.node.archivePath,
+        //   },
+        // }
+
+        const pageData = await getPageData({ pageData, contentNode, options })
+
+        // if (
+        //   options.type &&
+        //   options.type[`${contentType.graphqlSingleName}`] &&
+        //   options.type[`${contentType.graphqlSingleName}`].onCreatePage
+        // ) {
+        //   pageData =
+        //     options.type[`${contentType.graphqlSingleName}`].onCreatePage(
+        //       pageData
+        //     )
+        // }
+
         // create single page
-        return actions.createPage({
-          path: uri,
-          component: path.resolve(contentTypeTemplatePath),
-          ownerNodeId: id,
-          context: {
-            id,
-            seo,
-            archivePath: contentType.node && contentType.node.archivePath,
-          },
-        })
+        return actions.createPage(pageData)
       }
     })
   )
