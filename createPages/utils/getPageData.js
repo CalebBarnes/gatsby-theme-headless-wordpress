@@ -1,17 +1,18 @@
 const path = require("path")
+const { toCamel } = require("./toCamel")
 
 const getPageData = ({
+  nodeType,
   contentNode,
   options,
   contentTypeTemplatePath,
   seo,
 }) => {
-  const { id, uri, contentType } = contentNode
+  const { id, uri } = contentNode
 
-  const option =
-    options.type &&
-    options.type[`${contentType.graphqlSingleName}`] &&
-    options.type[`${contentType.graphqlSingleName}`]
+  const contentType = toCamel(nodeType)
+
+  const option = options.type && options.type[nodeType]
 
   // construct pageData object that will be passed to createPage function
   let pageData = {

@@ -15,7 +15,7 @@ const createContentPages = async ({
 }) =>
   Promise.all(
     contentNodes.map(async contentNode => {
-      const { id, uri, nodeType, contentType } = contentNode
+      const { id, uri, nodeType } = contentNode
 
       const isPageExcluded = getPageExclusionStatus({ contentNode, options })
 
@@ -68,6 +68,7 @@ const createContentPages = async ({
         reporter.verbose(`Creating ${nodeType} at ${uri}`)
 
         const pageData = getPageData({
+          nodeType,
           contentNode,
           options,
           contentTypeTemplatePath,
