@@ -5,6 +5,8 @@ const { createArchivePages } = require(`./createArchivePages`)
 const { getTemplatePath } = require(`./utils/getTemplatePath`)
 const { getPageExclusionStatus } = require(`./utils/getPageExclusionStatus`)
 
+const { getPageData } = require("./utils/getPageData")
+
 const createContentPages = async ({
   contentTypes,
   contentNodes,
@@ -65,17 +67,18 @@ const createContentPages = async ({
       } else {
         reporter.verbose(`Creating ${nodeType} at ${uri}`)
 
-        // create single page
-        return actions.createPage({
-          path: uri,
-          component: path.resolve(contentTypeTemplatePath),
-          ownerNodeId: id,
-          context: {
-            id,
-            seo,
-            archivePath: contentType.node && contentType.node.archivePath,
-          },
+        const pageData = getPageData({
+          contentNode,
+          options,
+          contentTypeTemplatePath,
+          seo,
         })
+
+        if (pageData) {
+          return actions.createPage(pageData)
+        } else {
+          return
+        }
       }
     })
   )
