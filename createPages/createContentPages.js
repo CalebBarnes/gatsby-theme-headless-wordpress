@@ -67,32 +67,18 @@ const createContentPages = async ({
       } else {
         reporter.verbose(`Creating ${nodeType} at ${uri}`)
 
-        // let pageData = {
-        //   path: uri,
-        //   component: path.resolve(contentTypeTemplatePath),
-        //   ownerNodeId: id,
-        //   context: {
-        //     id,
-        //     seo,
-        //     archivePath: contentType.node && contentType.node.archivePath,
-        //   },
-        // }
+        const pageData = getPageData({
+          contentNode,
+          options,
+          contentTypeTemplatePath,
+          seo,
+        })
 
-        const pageData = await getPageData({ pageData, contentNode, options })
-
-        // if (
-        //   options.type &&
-        //   options.type[`${contentType.graphqlSingleName}`] &&
-        //   options.type[`${contentType.graphqlSingleName}`].onCreatePage
-        // ) {
-        //   pageData =
-        //     options.type[`${contentType.graphqlSingleName}`].onCreatePage(
-        //       pageData
-        //     )
-        // }
-
-        // create single page
-        return actions.createPage(pageData)
+        if (pageData) {
+          return actions.createPage(pageData)
+        } else {
+          return
+        }
       }
     })
   )

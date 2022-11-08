@@ -1,5 +1,17 @@
-const getPageData = async ({ pageData, contentNode, options }) => {
-  const { id, uri, nodeType, contentType } = contentNode
+const path = require("path")
+
+const getPageData = ({
+  contentNode,
+  options,
+  contentTypeTemplatePath,
+  seo,
+}) => {
+  const { id, uri, contentType } = contentNode
+
+  const option =
+    options.type &&
+    options.type[`${contentType.graphqlSingleName}`] &&
+    options.type[`${contentType.graphqlSingleName}`]
 
   // construct pageData object that will be passed to createPage function
   let pageData = {
@@ -18,12 +30,11 @@ const getPageData = async ({ pageData, contentNode, options }) => {
   // this can be used to add additional context to the page or change any other pageData property
 
   if (
-    options.type &&
-    options.type[`${contentType.graphqlSingleName}`] &&
-    options.type[`${contentType.graphqlSingleName}`].onCreatePage
+    option &&
+    option.onCreatePage &&
+    option.onCreatePage instanceof Function
   ) {
-    pageData =
-      options.type[`${contentType.graphqlSingleName}`].onCreatePage(pageData)
+    pageData = option.onCreatePage(pageData)
   }
 
   return pageData
