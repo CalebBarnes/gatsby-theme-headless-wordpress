@@ -8,11 +8,11 @@ const getPageData = ({
   contentTypeTemplatePath,
   seo,
 }) => {
-  const { id, uri } = contentNode
+  const { id, uri, contentType } = contentNode
 
-  const contentType = toCamel(nodeType)
+  const camelNodeType = toCamel(nodeType)
 
-  const option = options.type && options.type[nodeType]
+  const option = options.type && options.type[camelNodeType]
 
   // construct pageData object that will be passed to createPage function
   let pageData = {
@@ -30,11 +30,7 @@ const getPageData = ({
   // it can mutate the pageData object before page creation
   // this can be used to add additional context to the page or change any other pageData property
 
-  if (
-    option &&
-    option.onCreatePage &&
-    option.onCreatePage instanceof Function
-  ) {
+  if (option && option.onCreatePage) {
     pageData = option.onCreatePage(pageData)
   }
 
