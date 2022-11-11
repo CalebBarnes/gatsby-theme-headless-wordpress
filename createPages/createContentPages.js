@@ -15,7 +15,7 @@ const createContentPages = async ({
 }) =>
   Promise.all(
     contentNodes.map(async contentNode => {
-      const { id, uri, nodeType } = contentNode
+      const { id, uri, slug, nodeType } = contentNode
 
       const isPageExcluded = getPageExclusionStatus({ contentNode, options })
 
@@ -24,7 +24,7 @@ const createContentPages = async ({
       }
 
       const archive = contentTypes.find(contentType => {
-        if (contentType.archivePath === uri) {
+        if (contentType.archivePath === `/${slug}/`) {
           if (uri === "/" && !contentType.isFrontPage) {
             // if no blog page exists, the archivePath defaults to "/"
             // even if the home page is already set to a different page
@@ -49,13 +49,13 @@ const createContentPages = async ({
       const seo = await getContentSeo({ id, nodeType, graphql })
 
       if (!!archive) {
-        reporter.verbose(`Creating ${archive.graphqlSingleName} at ${uri}`)
+        reporter.verbose(`Creating ${archive.graphqlSingleName} at /${slug}/`)
 
         await createArchivePages({
           archiveContentType: archive.graphqlSingleName,
           id,
           component: path.resolve(contentTypeTemplatePath),
-          uri,
+          slug,
           contentNodes,
           graphql,
           actions,

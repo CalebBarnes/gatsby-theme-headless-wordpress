@@ -6,6 +6,7 @@ async function getContentNodes({ graphql, reporter }) {
           __typename
           id
           uri
+          slug
           nodeType
           template {
             templateName
