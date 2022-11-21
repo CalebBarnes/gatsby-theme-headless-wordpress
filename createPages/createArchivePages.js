@@ -9,7 +9,7 @@ async function createArchivePages({
   archiveContentType,
   id,
   component,
-  uri,
+  slug,
   contentNodes,
   graphql,
   actions,
@@ -66,7 +66,7 @@ async function createArchivePages({
           // we want the first page to be the uri of the archive page. example: "/blog/"
           // and any additional pages to be numbered. example: "/blog/2"
 
-          return page === 1 ? uri : `${uri}${page}`
+          return page === 1 ? `/${slug}/` : `/${slug}/${page}`
         }
 
         return null
